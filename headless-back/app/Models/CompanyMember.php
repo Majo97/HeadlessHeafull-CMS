@@ -9,7 +9,7 @@ class CompanyMember extends Model
 {
     use HasFactory;
     protected $primaryKey = 'member_id';
-    protected $fillable = ['company_id', 'name', 'email'];
+    protected $fillable = ['company_id', 'name', 'email','status'];
 
     public function company()
     {

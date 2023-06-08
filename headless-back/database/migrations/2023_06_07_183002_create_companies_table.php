@@ -13,6 +13,7 @@ class CreateCompaniesTable extends Migration
             $table->string('name');
             $table->string('website');
             $table->unsignedBigInteger('created_by');
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
 
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
