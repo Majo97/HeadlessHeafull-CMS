@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Services\JobPositionService;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -11,7 +13,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(JobPositionService::class, function ($app) {
+            return new JobPositionService(
+                $app->make(JobPositionRepositoryInterface::class)
+            );
+        });
     }
 
     /**
