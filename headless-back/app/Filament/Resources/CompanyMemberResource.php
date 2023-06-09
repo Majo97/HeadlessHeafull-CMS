@@ -2,11 +2,11 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CompanyResource\Pages;
-use App\Filament\Resources\CompanyResource\RelationManagers;
-use App\Models\Company;
+use App\Filament\Resources\CompanyMemberResource\Pages;
+use App\Filament\Resources\CompanyMemberResource\RelationManagers;
+use App\Models\CompanyMember;
 use Filament\Forms;
-use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -14,9 +14,9 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class CompanyResource extends Resource
+class CompanyMemberResource extends Resource
 {
-    protected static ?string $model = Company::class;
+    protected static ?string $model = CompanyMember::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
@@ -25,11 +25,9 @@ class CompanyResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')->required(),
-                Forms\Components\TextInput::make('website')->required(),
-                Forms\Components\TextInput::make('description'),
-                FileUpload::make('image')
-                // ...
-                
+                Forms\Components\TextInput::make('email')->required(),
+                Select::make('company_id')
+                ->relationship('company', 'name'),
             ]);
     }
 
@@ -38,10 +36,10 @@ class CompanyResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('description'),
-                Tables\Columns\TextColumn::make('website'),
+                Tables\Columns\TextColumn::make('email'),
+                Tables\Columns\TextColumn::make('company.name'),
+               
                 
-                //
             ])
             ->filters([
                 //
@@ -53,20 +51,20 @@ class CompanyResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCompanies::route('/'),
-            'create' => Pages\CreateCompany::route('/create'),
-            'edit' => Pages\EditCompany::route('/{record}/edit'),
+            'index' => Pages\ListCompanyMembers::route('/'),
+            'create' => Pages\CreateCompanyMember::route('/create'),
+            'edit' => Pages\EditCompanyMember::route('/{record}/edit'),
         ];
-    }    
+    }
 }
