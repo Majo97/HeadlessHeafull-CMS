@@ -12,7 +12,10 @@ class CreateCompaniesTable extends Migration
             $table->id('company_id');
             $table->string('name');
             $table->string('website');
+            $table->string('description');
+            $table->string('image');
             $table->unsignedBigInteger('created_by');
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
 
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');

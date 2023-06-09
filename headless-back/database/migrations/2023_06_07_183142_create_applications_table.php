@@ -11,16 +11,14 @@ class CreateApplicationsTable extends Migration
         Schema::create('applications', function (Blueprint $table) {
             $table->id('application_id');
             $table->unsignedBigInteger('position_id');
-            $table->string('name');
-            $table->string('last_name');
+            $table->string('name', 48)->charset('utf8')->collation('utf8_unicode_ci')->regex('/^[A-Za-záéíóúÁÉÍÓÚñÑ\s]{1,48}$/');
+            $table->string('last_name', 48)->charset('utf8')->collation('utf8_unicode_ci')->regex('/^[A-Za-záéíóúÁÉÍÓÚñÑ\s]{1,48}$/');
             $table->string('email');
-            $table->string('cv');
+            $table->string('cv')->file(['mimes:pdf,docx']);
             $table->boolean('privacy_consent');
-            $table->unsignedBigInteger('created_by');
             $table->timestamps();
 
             $table->foreign('position_id')->references('position_id')->on('job_positions')->onDelete('cascade');
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
