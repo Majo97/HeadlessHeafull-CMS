@@ -16,9 +16,11 @@ use App\Http\Controllers\PositionController;
 |
 */
 
-
-/*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});*/
-Route::get('index', [PositionController::class, 'index']);
+/*Route::get('index', [PositionController::class, 'index']);*/
+Route::get('index/{perPage}', [PositionController::class, 'index']);
 Route::get('job-positions/{id}', [PositionController::class, 'show']);
+
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
+

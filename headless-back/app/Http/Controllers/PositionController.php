@@ -8,16 +8,12 @@ use Illuminate\Http\Request;
 
 class PositionController extends Controller
 {
-    public function index()
-    {
-        return response()->json("prueba");
-    }
-
-   /* public function index($perPage, JobPositionService $jobPositionService): JsonResponse
+   
+    public function index($perPage, JobPositionService $jobPositionService): JsonResponse
     {
         $positions = $jobPositionService->getAllPositionsPaginated($perPage);
         return response()->json($positions);
-    }*/
+    }
 
     public function show($id, JobPositionService $jobPositionService): JsonResponse
     {
