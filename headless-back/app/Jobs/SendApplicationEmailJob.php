@@ -10,6 +10,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Application;
+use App\Models\CompanyMember;
 
 class SendApplicationEmailJob implements ShouldQueue
 {
@@ -35,12 +36,14 @@ class SendApplicationEmailJob implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to('hola@gmail.com')->send(new ApplicationSubmittedMail($this->application));
-      /*  $companyMembers = $this->application->position->members;
-
+        $position = $this->application->position;
+        $company = $position->company;
+        $companyMembers = CompanyMember::where('company_id', $company->company_id)->get();
+    
         foreach ($companyMembers as $member) {
-            Mail::to($member->email)->send(new ApplicationSubmittedMail($this->application));
-        }*/
+            Mail::to($member->email)->send(new ApplicationSubmittedMail($this->application, $company));
+        }
     }
+    
 }
 

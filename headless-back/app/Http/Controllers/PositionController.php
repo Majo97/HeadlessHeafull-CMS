@@ -11,14 +11,12 @@ class PositionController extends Controller
    
     public function index($perPage, JobPositionService $jobPositionService): JsonResponse
     {
-        $positions = $jobPositionService->getAllPositionsPaginated ($perPage);
-        return response()->json($positions);
+        return $jobPositionService->getAllPositionsPaginated ($perPage);
     }
 
     public function show($id, JobPositionService $jobPositionService): JsonResponse
     {
-        $position = $jobPositionService->getPositionById($id);
-        return response()->json($position);
+        return $jobPositionService->getPositionById($id);
     }
 
 }
