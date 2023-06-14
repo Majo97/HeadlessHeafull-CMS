@@ -29,11 +29,26 @@ class JobPositionService
     public function getPositionById($id): JsonResponse
     {
         $position = $this->jobPositionRepository->getPositionById($id);
-
+    
         if ($position) {
-            return response()->json($position, Response::HTTP_OK);
+            $data = [
+                'image' => $position->image,
+                'company' => [
+                    'name' => $position->company->name,
+                    'website' => $position->company->website,
+                ],
+                'title' => $position->title,
+                'type' => $position->type->name,
+                'address' => $position->address,
+                'description' => $position->description,
+                'requirements' => $position->requirements,
+                'responsibilities' => $position->responsibilities,
+            ];
+    
+            return response()->json($data, Response::HTTP_OK);
         } else {
             return response()->json(['message' => 'Job position not found.'], Response::HTTP_NOT_FOUND);
         }
     }
+    
 }

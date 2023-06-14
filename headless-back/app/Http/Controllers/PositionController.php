@@ -11,7 +11,7 @@ class PositionController extends Controller
    
     public function index($perPage, JobPositionService $jobPositionService): JsonResponse
     {
-        $positions = $jobPositionService->getAllPositionsPaginated($perPage);
+        $positions = $jobPositionService->getAllPositionsPaginated ($perPage);
         return response()->json($positions);
     }
 

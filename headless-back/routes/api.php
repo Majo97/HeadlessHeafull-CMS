@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PositionController;
+use App\Http\Controllers\ApplicationController;
 
 
 /*
@@ -19,6 +20,7 @@ use App\Http\Controllers\PositionController;
 /*Route::get('index', [PositionController::class, 'index']);*/
 Route::get('index/{perPage}', [PositionController::class, 'index']);
 Route::get('job-positions/{id}', [PositionController::class, 'show']);
+Route::post('aplication', [ApplicationController::class, 'apply']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
