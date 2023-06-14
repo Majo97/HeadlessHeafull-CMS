@@ -52,6 +52,7 @@ class JobPositionResource extends Resource
                 Tables\Columns\TextColumn::make('responsibilities'),
                 Tables\Columns\TextColumn::make('expiration_date'),
                 Tables\Columns\TextColumn::make('JobPositionType.name'),
+                Tables\Columns\TextColumn::make('type.name'),
                 Tables\Columns\TextColumn::make('company.name'),
             ])
             ->filters([
