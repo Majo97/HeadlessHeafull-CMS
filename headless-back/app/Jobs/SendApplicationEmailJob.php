@@ -41,9 +41,8 @@ class SendApplicationEmailJob implements ShouldQueue
         $companyMembers = CompanyMember::where('company_id', $company->company_id)->get();
     
         foreach ($companyMembers as $member) {
-            Mail::to($member->email)->send(new ApplicationSubmittedMail($this->application, $company));
+            Mail::to($member->email)->send(new ApplicationSubmittedMail($this->application));
         }
     }
-    
 }
 

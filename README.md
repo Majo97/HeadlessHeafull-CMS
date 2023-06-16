@@ -10,8 +10,7 @@ Este proyecto es una aplicación web desarrollada con Laravel Sail y Filament.
 
 Asegúrate de tener los siguientes requisitos antes de ejecutar el proyecto:
 
-- Laravel Sail
-- Composer
+- Docker
 
 ### Pasos
 
@@ -46,6 +45,6 @@ El proyecto incluye pruebas automatizadas que puedes ejecutar con el siguiente c
 
 ## Frontend
 
-Si deseas ver el proyecto en funcionamiento, clona el repositorio del frontend [AQUÍ](enlace-a-repositorio-frontend) y sigue las instrucciones de instalación y ejecución proporcionadas en ese repositorio.
+Si deseas ver el proyecto en funcionamiento, clona el repositorio del frontend [AQUÍ](https://github.com/Majo97/Headless-Frontend) y sigue las instrucciones de instalación y ejecución proporcionadas en ese repositorio.
 
 

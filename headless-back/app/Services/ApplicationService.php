@@ -38,8 +38,8 @@ class ApplicationService
         }
     
         $cvFileName = Str::random(40) . '.' . $data['cv']->getClientOriginalExtension(); //generar un nombre unico para el archivo
-        $cvPath = $data['cv']->storeAs('cv', $cvFileName, 'public'); //guardar el archivo con el nuevo en public cv
-        $data['cv'] = $cvPath; //reemplazar el campo cv con la nueva ubicacion
+        $cvPath = $data['cv']->storeAs('cv', $cvFileName, 'public'); //guardar el archivo con el nuevo nombre en public cv
+        $data['cv'] = $cvPath; 
         
         $application = $this->applicationRepository->create($data);//crear nueva aplicacion usando el repositorio
 

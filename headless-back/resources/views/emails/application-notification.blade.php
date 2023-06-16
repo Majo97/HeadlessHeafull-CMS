@@ -11,7 +11,7 @@
     <p>Position: {{ $application->position->title }}</p>
     <p>Applicant: {{ $application->name }} {{ $application->last_name }}</p>
     <p>Email: {{ $application->email }}</p>
-
-
+    
 </body>
 </html>
+
