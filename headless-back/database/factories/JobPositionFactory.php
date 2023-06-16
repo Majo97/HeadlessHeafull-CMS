@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\JobPosition;
 use Illuminate\Database\Eloquent\Factories\Factory;
+
 use Illuminate\Support\Facades\Auth;
 
 class JobPositionFactory extends Factory

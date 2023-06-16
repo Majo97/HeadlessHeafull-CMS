@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Mail;
 
 use App\Models\Application;
@@ -35,5 +36,4 @@ class ApplicationSubmittedMail extends Mailable implements ShouldQueue
             ->view('emails.application-notification')
             ->with('application', $this->application);
     }
-    
 }

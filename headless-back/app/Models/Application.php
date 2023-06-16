@@ -15,14 +15,6 @@ class Application extends Model
     {
         return $this->belongsTo(JobPosition::class, 'position_id');
     }
-    public function members()
-    {
-        return $this->hasManyThrough(
-            CompanyMember::class,
-            Company::class,
-            'company_id',
-            'company_id'
-        );
-    }
+  
  
 }

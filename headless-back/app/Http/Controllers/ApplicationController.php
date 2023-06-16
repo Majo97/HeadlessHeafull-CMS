@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ApplicationRequest;
@@ -8,13 +9,9 @@ use Illuminate\Http\Request;
 
 class ApplicationController extends Controller
 {
- public function apply(ApplicationRequest $request, ApplicationService $applicationService): JsonResponse
-    {
-        $data = $request->validated();
-        $applicationService->apply($data);
-        return response()->json( $applicationService);
-    }
-       
 
+    public function apply(ApplicationRequest $request, ApplicationService $applicationService): JsonResponse
+    {
+        return $applicationService->apply ($request->validated());
+    }
 }
-   
