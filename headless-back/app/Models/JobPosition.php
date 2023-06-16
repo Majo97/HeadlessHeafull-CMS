@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Facades\Auth;
 class JobPosition extends Model
 {
+    use HasFactory;
     protected $primaryKey = 'position_id';
-    protected $fillable = ['company_id', 'type_id', 'title', 'image', 'address', 'description', 'requirements', 'responsibilities', 'expiration_date', 'status'];
+    protected $fillable = ['company_id', 'type_id', 'title', 'image', 'address', 'description', 'requirements', 'responsibilities', 'expiration_date', 'status','created_by'];
 
     public function company()
     {
@@ -22,6 +23,14 @@ class JobPosition extends Model
     public function applications()
     {
         return $this->hasMany(Application::class, 'position_id');
+    }
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::creating(function ($model) {
+            $model->created_by = Auth::id();
+        });
     }
 }
 

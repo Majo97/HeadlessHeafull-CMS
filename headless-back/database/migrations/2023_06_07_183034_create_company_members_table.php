@@ -14,6 +14,7 @@ class CreateCompanyMembersTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->unsignedBigInteger('created_by');
+            $table->enum('status', ['active', 'inactive'])->default('active');
             
             $table->foreign('company_id')->references('company_id')->on('companies')->onDelete('cascade');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');

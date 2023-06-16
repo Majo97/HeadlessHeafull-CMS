@@ -20,3 +20,4 @@ class CreateJobPositionTypesTable extends Migration
         Schema::dropIfExists('job_position_types');
     }
 }
+
