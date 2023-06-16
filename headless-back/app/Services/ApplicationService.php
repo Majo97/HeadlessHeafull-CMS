@@ -31,19 +31,20 @@ class ApplicationService
         $position = JobPosition::find($data['position_id']);
     
         if (!$position || $position->status !== 'active') {
-            // La plaza no está activa
+            // Mensaje si la plaza no esta activa
             return response()->json([
                 'error' => 'Failed to submit application. The position is not active.'
             ], 400);
         }
     
-        $cvFileName = Str::random(40) . '.' . $data['cv']->getClientOriginalExtension();
-        $cvPath = $data['cv']->storeAs('cv', $cvFileName, 'public');
-        $data['cv'] = $cvPath;
+        $cvFileName = Str::random(40) . '.' . $data['cv']->getClientOriginalExtension(); //generar un nombre unico para el archivo
+        $cvPath = $data['cv']->storeAs('cv', $cvFileName, 'public'); //guardar el archivo con el nuevo en public cv
+        $data['cv'] = $cvPath; //reemplazar el campo cv con la nueva ubicacion
         
-        $application = $this->applicationRepository->create($data);
-        Redis::connection()->rpush('email_queue', json_encode($application));
-        SendApplicationEmailJob::dispatch($application)->onQueue('email');
+        $application = $this->applicationRepository->create($data);//crear nueva aplicacion usando el repositorio
+
+        Redis::connection()->rpush('email_queue', json_encode($application));//poner en cola la informacion de la aplicacion
+        SendApplicationEmailJob::dispatch($application)->onQueue('email');//enviar el trabajo 
         
         return response()->json([
             'success' => 'Application submitted successfully.'

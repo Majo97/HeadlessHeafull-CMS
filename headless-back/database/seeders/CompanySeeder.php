@@ -15,15 +15,13 @@ class CompanySeeder extends Seeder
      */
     public function run(): void
     {
-         // Deshabilitar la función boot() temporalmente
+         
          Company::flushEventListeners();
 
-         // Crear instancias de Company utilizando el Factory dentro de una transacción
          DB::transaction(function () {
              Company::factory()->count(10)->create();
          });
  
-         // Volver a habilitar la función boot()
          Company::boot();
     }
 }

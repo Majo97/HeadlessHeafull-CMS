@@ -1,5 +1,4 @@
 <?php
-// app/Services/JobPositionService.php
 
 namespace App\Services;
 
@@ -17,14 +16,16 @@ class JobPositionService
 
     public function getAllPositionsPaginated($perPage): JsonResponse
     {
+        if (!$perPage || !is_numeric($perPage) || $perPage <= 0) {
+            $perPage = 10; 
+        }
         $positions = $this->jobPositionRepository->getAllPositionsPaginated($perPage);
-
         if ($positions) {
             return response()->json($positions, Response::HTTP_OK);
         } else {
             return response()->json(['message' => 'No job positions found.'], Response::HTTP_NOT_FOUND);
         }
-    }
+    }    
 
     public function getPositionById($id): JsonResponse
     {
@@ -32,6 +33,7 @@ class JobPositionService
     
         if ($position) {
             $data = [
+                'id' => $position->position_id,
                 'image' => $position->image,
                 'company' => [
                     'name' => $position->company->name,
